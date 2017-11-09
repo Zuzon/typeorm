@@ -106,7 +106,7 @@ export class SqliteDriver extends AbstractSqliteDriver {
      */
     protected loadDependencies(): void {
         try {
-            this.sqlite = PlatformTools.load("sqlite3").verbose();
+            this.sqlite = require("sqlite3").verbose();
 
         } catch (e) {
             throw new DriverPackageNotInstalledError("SQLite", "sqlite3");
