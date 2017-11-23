@@ -4,6 +4,7 @@ import {TableColumn} from "../../schema-builder/schema/TableColumn";
 import {Table} from "../../schema-builder/schema/Table";
 import {TableForeignKey} from "../../schema-builder/schema/TableForeignKey";
 import {TableIndex} from "../../schema-builder/schema/TableIndex";
+import fs from "fs";
 import {
     AggregationCursor,
     BulkWriteOpResultObject,
@@ -36,7 +37,6 @@ import {
     UpdateWriteOpResult
 } from "./typings";
 import {Connection} from "../../connection/Connection";
-import {ReadStream} from "../../platform/PlatformTools";
 import {MongoEntityManager} from "../../entity-manager/MongoEntityManager";
 
 /**
@@ -392,7 +392,7 @@ export class MongoQueryRunner implements QueryRunner {
     /**
      * Returns raw data stream.
      */
-    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream> {
+    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream> {
         throw new Error(`Stream is not supported by MongoDB driver.`);
     }
 

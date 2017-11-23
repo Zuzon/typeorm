@@ -3,7 +3,7 @@ import {Table} from "../schema-builder/schema/Table";
 import {TableForeignKey} from "../schema-builder/schema/TableForeignKey";
 import {TableIndex} from "../schema-builder/schema/TableIndex";
 import {Connection} from "../connection/Connection";
-import {ReadStream} from "../platform/PlatformTools";
+import fs from "fs";
 import {InsertResult} from "../driver/InsertResult";
 import {EntityManager} from "../entity-manager/EntityManager";
 import {ObjectLiteral} from "../common/ObjectLiteral";
@@ -89,7 +89,7 @@ export interface QueryRunner {
     /**
      * Returns raw data stream.
      */
-    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream>; // todo: ReadStream gonna bring problems in websql driver
+    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream>; // todo: ReadStream gonna bring problems in websql driver
 
     /**
      * Insert a new row with given values into the given table.

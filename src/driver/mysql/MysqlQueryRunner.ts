@@ -10,7 +10,7 @@ import {TableIndex} from "../../schema-builder/schema/TableIndex";
 import {QueryRunnerAlreadyReleasedError} from "../../error/QueryRunnerAlreadyReleasedError";
 import {MysqlDriver} from "./MysqlDriver";
 import {Connection} from "../../connection/Connection";
-import {ReadStream} from "../../platform/PlatformTools";
+import fs from "fs";
 import {EntityManager} from "../../entity-manager/EntityManager";
 import {OrmUtils} from "../../util/OrmUtils";
 import {InsertResult} from "../InsertResult";
@@ -214,7 +214,7 @@ export class MysqlQueryRunner implements QueryRunner {
     /**
      * Returns raw data stream.
      */
-    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream> {
+    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream> {
         if (this.isReleased)
             throw new QueryRunnerAlreadyReleasedError();
 

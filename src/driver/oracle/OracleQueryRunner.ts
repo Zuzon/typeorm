@@ -11,7 +11,7 @@ import {TableIndex} from "../../schema-builder/schema/TableIndex";
 import {QueryRunnerAlreadyReleasedError} from "../../error/QueryRunnerAlreadyReleasedError";
 import {OracleDriver} from "./OracleDriver";
 import {Connection} from "../../connection/Connection";
-import {ReadStream} from "../../platform/PlatformTools";
+import fs from "fs";
 import {EntityManager} from "../../entity-manager/EntityManager";
 import {QueryFailedError} from "../../error/QueryFailedError";
 
@@ -230,7 +230,7 @@ export class OracleQueryRunner implements QueryRunner {
     /**
      * Returns raw data stream.
      */
-    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream> {
+    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream> {
         throw new Error(`Stream is not supported by Oracle driver.`);
     }
 

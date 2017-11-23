@@ -11,7 +11,7 @@ import {TablePrimaryKey} from "../../schema-builder/schema/TablePrimaryKey";
 import {RandomGenerator} from "../../util/RandomGenerator";
 import {AbstractSqliteDriver} from "./AbstractSqliteDriver";
 import {Connection} from "../../connection/Connection";
-import {ReadStream} from "../../platform/PlatformTools";
+import fs from "fs";
 import {EntityManager} from "../../entity-manager/EntityManager";
 import {InsertResult} from "../InsertResult";
 
@@ -144,7 +144,7 @@ export class AbstractSqliteQueryRunner implements QueryRunner {
     /**
      * Returns raw data stream.
      */
-    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream> {
+    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream> {
         throw new Error(`Stream is not supported by sqlite driver.`);
     }
 

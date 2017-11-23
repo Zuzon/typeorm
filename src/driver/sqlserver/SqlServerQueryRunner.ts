@@ -10,7 +10,7 @@ import {TableIndex} from "../../schema-builder/schema/TableIndex";
 import {QueryRunnerAlreadyReleasedError} from "../../error/QueryRunnerAlreadyReleasedError";
 import {SqlServerDriver} from "./SqlServerDriver";
 import {Connection} from "../../connection/Connection";
-import {ReadStream} from "../../platform/PlatformTools";
+import fs from "fs";
 import {MssqlParameter} from "./MssqlParameter";
 import {OrmUtils} from "../../util/OrmUtils";
 import {EntityManager} from "../../entity-manager/EntityManager";
@@ -337,7 +337,7 @@ export class SqlServerQueryRunner implements QueryRunner {
     /**
      * Returns raw data stream.
      */
-    async stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream> {
+    async stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream> {
         if (this.isReleased)
             throw new QueryRunnerAlreadyReleasedError();
 
@@ -349,7 +349,7 @@ export class SqlServerQueryRunner implements QueryRunner {
             await Promise.all(otherWaitingPromises);
         }
 
-        const promise = new Promise<ReadStream>(async (ok, fail) => {
+        const promise = new Promise<fs.ReadStream>(async (ok, fail) => {
 
             this.driver.connection.logger.logQuery(query, parameters, this);
             const pool = await (this.mode === "slave" ? this.driver.obtainSlaveConnection() : this.driver.obtainMasterConnection());
@@ -387,7 +387,7 @@ export class SqlServerQueryRunner implements QueryRunner {
             });
             if (onEnd) request.on("done", onEnd);
             if (onError) request.on("error", onError);
-            ok(request as ReadStream);
+            ok(request as fs.ReadStream);
         });
         if (this.isTransactionActive)
             this.queryResponsibilityChain.push(promise);

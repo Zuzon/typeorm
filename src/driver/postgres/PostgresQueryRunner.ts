@@ -10,7 +10,7 @@ import {TablePrimaryKey} from "../../schema-builder/schema/TablePrimaryKey";
 import {QueryRunnerAlreadyReleasedError} from "../../error/QueryRunnerAlreadyReleasedError";
 import {PostgresDriver} from "./PostgresDriver";
 import {Connection} from "../../connection/Connection";
-import {ReadStream} from "../../platform/PlatformTools";
+import fs from "fs";
 import {EntityManager} from "../../entity-manager/EntityManager";
 import {InsertResult} from "../InsertResult";
 import {QueryFailedError} from "../../error/QueryFailedError";
@@ -224,7 +224,7 @@ export class PostgresQueryRunner implements QueryRunner {
     /**
      * Returns raw data stream.
      */
-    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<ReadStream> {
+    stream(query: string, parameters?: any[], onEnd?: Function, onError?: Function): Promise<fs.ReadStream> {
         const QueryStream = this.driver.loadStreamDependency();
         if (this.isReleased)
             throw new QueryRunnerAlreadyReleasedError();
