@@ -14,7 +14,7 @@ import {RelationCountLoader} from "./relation-count/RelationCountLoader";
 import {RelationCountMetadataToAttributeTransformer} from "./relation-count/RelationCountMetadataToAttributeTransformer";
 import {Broadcaster} from "../subscriber/Broadcaster";
 import {QueryBuilder} from "./QueryBuilder";
-import {ReadStream} from "../platform/PlatformTools";
+import fs from "fs";
 import {LockNotSupportedOnGivenDriverError} from "../error/LockNotSupportedOnGivenDriverError";
 import {MysqlDriver} from "../driver/mysql/MysqlDriver";
 import {PostgresDriver} from "../driver/postgres/PostgresDriver";
@@ -1064,7 +1064,7 @@ export class SelectQueryBuilder<Entity> extends QueryBuilder<Entity> implements 
     /**
      * Executes built SQL query and returns raw data stream.
      */
-    async stream(): Promise<ReadStream> {
+    async stream(): Promise<fs.ReadStream> {
         this.expressionMap.queryEntity = false;
         const [sql, parameters] = this.getQueryAndParameters();
         const queryRunner = this.obtainQueryRunner();

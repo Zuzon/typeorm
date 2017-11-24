@@ -8,6 +8,7 @@ import {RemoveOptions} from "./RemoveOptions";
 import {EntityManager} from "../entity-manager/EntityManager";
 import {QueryRunner} from "../query-runner/QueryRunner";
 import {SelectQueryBuilder} from "../query-builder/SelectQueryBuilder";
+import {QueryPartialEntity} from "../query-builder/QueryPartialEntity";
 
 /**
  * Repository is supposed to work with your entity objects. Find entities, insert, update, delete, etc.
@@ -139,7 +140,7 @@ export class Repository<Entity extends ObjectLiteral> {
      * Executes fast and efficient INSERT query.
      * Does not check if entity exist in the database, so query will fail if duplicate entity is being inserted.
      */
-    async insert(entity: Partial<Entity>|Partial<Entity>[], options?: SaveOptions): Promise<void> {
+    async insert(entity: QueryPartialEntity<Entity>|QueryPartialEntity<Entity>[], options?: SaveOptions): Promise<void> {
         return this.manager.insert(this.metadata.target, entity, options);
     }
 
