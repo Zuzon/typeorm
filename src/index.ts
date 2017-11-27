@@ -8,7 +8,6 @@ import {getFromContainer} from "./container";
 import {ObjectType} from "./common/ObjectType";
 import {Repository} from "./repository/Repository";
 import {EntityManager} from "./entity-manager/EntityManager";
-import {PlatformTools} from "./platform/PlatformTools";
 import {TreeRepository} from "./repository/TreeRepository";
 import {MongoRepository} from "./repository/MongoRepository";
 import {ConnectionOptionsReader} from "./connection/ConnectionOptionsReader";
