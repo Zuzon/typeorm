@@ -1,7 +1,6 @@
 import {DriverPackageNotInstalledError} from "../../error/DriverPackageNotInstalledError";
 import {SqliteQueryRunner} from "./SqliteQueryRunner";
 import {DriverOptionNotSetError} from "../../error/DriverOptionNotSetError";
-import {PlatformTools} from "../../platform/PlatformTools";
 import {Connection} from "../../connection/Connection";
 import {SqliteConnectionOptions} from "./SqliteConnectionOptions";
 import {ColumnType} from "../types/ColumnTypes";
@@ -118,8 +117,8 @@ export class SqliteDriver extends AbstractSqliteDriver {
      */
     protected createDatabaseDirectory(fullPath: string): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            const mkdirp = PlatformTools.load("mkdirp");
-            const path = PlatformTools.load("path");
+            const mkdirp = require("mkdirp");
+            const path = require("path");
             mkdirp(path.dirname(fullPath), (err: any) => err ? reject(err) : resolve());
         });
     }
